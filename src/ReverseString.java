@@ -15,11 +15,10 @@ public class ReverseString {
     public static String reverseWithWhile(String stringToReverse){
         char[] stringToCharArray = stringToReverse.toCharArray();
         String reversed = "";
-        int left = 0;
-        int right = stringToCharArray.length - 1;
-        while (right >= left) {
-           reversed += stringToCharArray[right];
-            --right;
+        int rightLetter = stringToCharArray.length - 1;
+        while (rightLetter >= 0) {
+           reversed += stringToCharArray[rightLetter];
+            --rightLetter;
         }
         return reversed;
     }
