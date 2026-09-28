@@ -14,22 +14,23 @@ public class ReverseStringSteps {
      */
 
     public static void startGame() {
-        final Scanner scanner = new Scanner(System.in);
-        boolean isRunning = true;
+        try (final Scanner scanner = new Scanner(System.in)) {
+            boolean isRunning = true;
 
-        System.out.println("=== Welcome to the String Reverser ===");
+            System.out.println("=== Welcome to the String Reverser ===");
 
-        while (isRunning) {
-            final String stringToReverse = askForString(scanner);
-            executeMenu();
-            final int choice = chooseOptionToReverse(scanner);
-            if (choice == 0){
-                System.out.println();
-                System.out.println("Thank you for using the program. Goodbye!");
-                break;
+            while (isRunning) {
+                final String stringToReverse = askForString(scanner);
+                executeMenu();
+                final int choice = chooseOptionToReverse(scanner);
+                if (choice == 0) {
+                    System.out.println();
+                    System.out.println("Thank you for using the program. Goodbye!");
+                    break;
+                }
+                executeReversal(stringToReverse, choice);
+                isRunning = askToContinue(scanner);
             }
-            executeReversal(stringToReverse, choice);
-            isRunning = askToContinue(scanner);
         }
     }
 
