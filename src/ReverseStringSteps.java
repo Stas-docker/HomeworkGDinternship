@@ -21,7 +21,7 @@ public class ReverseStringSteps {
 
             while (isRunning) {
                 final String stringToReverse = askForString(scanner);
-                executeMenu();
+                showMenu();
                 final int choice = chooseOptionToReverse(scanner);
                 if (choice == 0) {
                     System.out.println();
@@ -51,7 +51,7 @@ public class ReverseStringSteps {
      * Displays the available string reversal methods to the console.
      */
 
-    private static void executeMenu(){
+    private static void showMenu(){
         System.out.println();
         System.out.println("--- AVAILABLE REVERSAL METHODS ---");
         System.out.println("1 - Reverse using StringBuffer");
@@ -73,7 +73,7 @@ public class ReverseStringSteps {
 
     private static int chooseOptionToReverse(final Scanner scanner){
         System.out.println("Please enter the number of your choice (0-5): ");
-       final int choice = getValidInputOfIntegerNumber(scanner);
+        final int choice = getValidInputOfIntegerNumber(scanner);
         System.out.println();
         if (choice >= 0 && choice<= 5) {
             return choice;
@@ -125,22 +125,27 @@ public class ReverseStringSteps {
      */
 
     private static boolean askToContinue(final Scanner scanner){
-        System.out.println("Would you like to reverse another string? Enter 1 (YES) or 2 (NO): ");
-        final int wantToContinue = getValidInputOfIntegerNumber(scanner);
-        System.out.println();
-        if (wantToContinue == 1) {
-            System.out.println("Let's go again!");
-            return true;
-        } else if (wantToContinue == 2) {
+        boolean shouldContinue = false;
+        boolean isInputValid = false;
+        while (!isInputValid) {
+            System.out.println("Would you like to reverse another string? Enter 1 (YES) or 2 (NO): ");
+            final int wantToContinue = getValidInputOfIntegerNumber(scanner);
             System.out.println();
-            System.out.println("Thank you for using the program. Goodbye!");
-            return false;
+            if (wantToContinue == 1) {
+                System.out.println("Let's go again!");
+                shouldContinue = true;
+                isInputValid = true;
+            } else if (wantToContinue == 2) {
+                System.out.println();
+                System.out.println("Thank you for using the program. Goodbye!");
+                shouldContinue = false;
+                isInputValid = true;
+            } else {
+                System.out.println("Invalid input! Please enter exactly 1 or 2.");
+                System.out.println();
+            }
         }
-        else {
-            System.out.println("Invalid input! Please enter exactly 1 or 2.");
-            System.out.println();
-            return askToContinue(scanner);
-        }
+        return shouldContinue;
     }
 
     /**
